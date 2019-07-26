@@ -1,0 +1,32 @@
+#include <pcmConfig.h>
+#include <pcmRF.h>
+#include <TMRpcm.h>
+#include<SPI.h>
+#include <SD.h>
+#define SD_ChipSelectPin 4
+TMRpcm audio;
+
+void setup() {
+  // setup code:
+  Serial.begin(9600);
+  audio.speakerPin=9;
+  if(!SD.begin(SD_ChipSelectPin)){
+    Serial.println("SD fails");
+    return;
+  }
+  audio.setVolume(6);
+  //play();
+}
+
+void play() {
+  audio.stopPlayback();
+  audio.play("teste.wav", 20);  
+  delay(100);
+  return; 
+}
+
+void loop() {
+  // play music
+  play();
+
+}
